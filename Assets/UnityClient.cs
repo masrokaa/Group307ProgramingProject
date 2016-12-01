@@ -13,7 +13,8 @@ public class UnityClient : MonoBehaviour {
     Server server;
     Client client;
 
-    public static int currentPlayer;
+    public static int currentPlayer=4;
+    
 
     public Text textGui;
     public static bool isHost = false;
