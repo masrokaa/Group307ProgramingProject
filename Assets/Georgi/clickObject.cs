@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class script : MonoBehaviour {
+public class clickObject : MonoBehaviour {
 
     public int mouseClicks;
 
 
     // Use this for initialization
     void Start () {
-        writeText = GameObject.Find("DiceText").GetComponent<Text>();
+        
     }
 	
 	// Update is called once per frame
@@ -22,14 +22,9 @@ public class script : MonoBehaviour {
         {
             int dice = Random.Range(1, 7);
             mouseClicks += 1;
+
+            Debug.Log("pawn clicked");
         }
     }
 
-    public void WriteToTextField()
-    {
-        
-
-        writeText.text = "" + rndDice;
-
-    }
 }

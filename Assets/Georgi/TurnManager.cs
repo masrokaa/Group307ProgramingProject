@@ -39,7 +39,7 @@ public class TurnManager : MonoBehaviour {
 
     void releasePawn()
     {
-
+        
     }
 
 	// Use this for initialization
