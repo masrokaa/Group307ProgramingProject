@@ -9,6 +9,7 @@ public class Dice : MonoBehaviour
     Text writeText;
     public Sprite[] sprites;
     Image randomImg;
+    public int rndDice;
 
     // Use this for initialization
     void Start()
@@ -18,7 +19,7 @@ public class Dice : MonoBehaviour
 
     public void WriteToTextField()
     {
-        int rndDice = Random.Range(1, 7);
+        rndDice = Random.Range(1, 7);
         randomImg.sprite = sprites[rndDice - 1];
     }
 }
