@@ -11,12 +11,10 @@ public class whoPlays : MonoBehaviour {
 
     public  void switchPlayer()
     {
-        if (Dice.diceroll < 6)
-        {
-            currentPlayer++;
+        
 
-        }
-            player.text = "player " + currentPlayer;
+            player.text = "Outcome " + Dice.diceroll;
+            
     }
 
 

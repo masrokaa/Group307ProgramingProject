@@ -3,7 +3,7 @@ using System.Collections;
 
 public class pawn : MonoBehaviour {
 
-    public bool isPawnActive;
+    public bool isPawnActive = false;
 
 
 

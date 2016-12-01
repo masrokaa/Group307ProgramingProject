@@ -22,9 +22,11 @@ public class getPawnOut : MonoBehaviour {
 
     public void getPawnActive()
     {
+        
         if (Dice.diceroll == 6)
         {
 
         }
+        
     }
 }
