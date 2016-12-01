@@ -41,6 +41,8 @@ public class UnityClient : MonoBehaviour {
         Debug.Log("starting client");
         client.StartClient();
         Debug.Log("client started");
+
+       
     }
 
 	// Use this for initialization
@@ -53,32 +55,22 @@ public class UnityClient : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-       
+
+        if (server != null && client.dataGottenFromServer != "")
+            Application.LoadLevel("Lobby");
+
         if (server != null) {
             Debug.Log("server started and has " + server.clients.Count + " clients connected to the server");
-            /*
-            if(Application.loadedLevelName == "Lobby") {
-                if (server.clients.Count == 1)
-                {
-                    GameObject.Find("Player 2").GetComponent<Text>().text = "Player 2";
-    
-               }
-                if (server.clients.Count == 2)
-                {
-                    GameObject.Find("Player 3").GetComponent<Text>().text = "Player 3";
-
-                }
-                if (server.clients.Count == 3)
-                {
-                    GameObject.Find("Player 4").GetComponent<Text>().text = "Player 4";
-
-                }
-
-            }
-            */
-
-
         }
 
     }
+
+    public int GetNumberOfPlayersInLobby()
+    {
+        int number = 1;
+        number += server.clients.Count;
+        return number;
+    }
+
+
 }

@@ -10,7 +10,7 @@ using System.Threading;
 public class Server  {
     Thread server;
     public List<Thread> clients = new List<Thread>();
-    
+    public string dataToSend = "none";
 
     public string storedData = "none";
 
@@ -28,7 +28,7 @@ public class Server  {
         
 
         int port = 1700;
-        TcpListener listener = new TcpListener(IPAddress.Loopback, port);
+        TcpListener listener = new TcpListener(IPAddress.Any, port);
         listener.Start();
 
         while (clients.Count<3)
@@ -55,7 +55,7 @@ public class Server  {
         while (true)
         {
 
-
+            writer.WriteLine(dataToSend);
 
             storedData = reader.ReadLine();
 

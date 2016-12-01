@@ -7,7 +7,7 @@ using System.Threading;
 public class Client  {
 
     Thread client;
-
+    public string dataGottenFromServer = "";
     string ipAdress;
     bool sendData = false;
     string data = "data that was send";
@@ -37,11 +37,10 @@ public class Client  {
 
         while (true)
         {
-           
-            
-           
-                
-                writer.WriteLine(data);
+
+
+            dataGottenFromServer = reader.ReadLine();
+            writer.WriteLine(data);
 
                
         }
