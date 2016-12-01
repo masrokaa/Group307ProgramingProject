@@ -3,20 +3,21 @@ using System.Collections;
 
 public class Pawn : MonoBehaviour {
 
-    public string[] greenPawns = new string[] { "green1", "green2", "green3", "green4"};
+    //public string[] greenPawns = new string[] { "green1", "green2", "green3", "green4"};
     bool home;
     float homePosition;
     float startPosition;
     float currentPosition;
+    public string pawnColor;
 
-    public void colorHomePosition()
+   /* public void colorHomePosition()
     {
         for (int i = 0; i < greenPawns.Length; i++)
         {
-
+            greenPawns[0] = 
         }
 
-        /*if ( == 0)
+        if ( == 0)
         {
             float homePosition = kordinat[0];
         }
@@ -34,10 +35,10 @@ public class Pawn : MonoBehaviour {
         if (Pawn.color == "yellow")
         {
             float homePosition = kordinat[30];
-        } */
+        } 
     }
 
-   /*static void homeToActive()
+   static void homeToActive()
     {
         if (Dice.rndDice == 6)
             Pawn.home = false;
