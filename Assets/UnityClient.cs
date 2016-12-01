@@ -61,11 +61,11 @@ public class UnityClient : MonoBehaviour {
 
         if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name != "Lobby")
             SceneManager.LoadScene("Lobby");
-
+        /*
         if (server != null) {
             Debug.Log("server started and has " + server.clients.Count + " clients connected to the server");
         }
-
+        */
     }
 
     public int GetNumberOfPlayersInLobby()

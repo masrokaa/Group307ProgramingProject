@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LobbyBehaviour : MonoBehaviour {
     public Text player1, player2, player3, player4;
     bool ishost;
+    float passedTime = 0;
     UnityClient multiplayerInfo;
 
 	// Use this for initialization
@@ -16,12 +17,18 @@ public class LobbyBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.deltaTime % 1.2 > 1)
+        passedTime += Time.deltaTime;
+        if (passedTime > 1)
+        {
             updatePlayers();
+            passedTime = 0;
+        }
 
 	}
     void updatePlayers()
     {
+
+        Debug.Log("updating players");
         int numberOfPlayers = 0;
         numberOfPlayers = multiplayerInfo.GetNumberOfPlayersInLobby();
         if (numberOfPlayers > 0)
