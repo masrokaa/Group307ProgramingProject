@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class clickObject : MonoBehaviour {
 
     public int mouseClicks;
-
+    public string componentName;
 
     // Use this for initialization
     void Start () {
         
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            int dice = Random.Range(1, 7);
             mouseClicks += 1;
-
-            Debug.Log("pawn clicked");
+            Debug.Log("The " + this.gameObject.name + " was clicked");
+            componentName = this.gameObject.name;
         }
     }
 
