@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Net;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 
@@ -13,6 +14,8 @@ public class UnityClient : MonoBehaviour {
     Client client;
     public Text textGui;
     public static bool isHost = false;
+
+    public Scene Lobby;
 
     string ip= "localHost";
 
@@ -25,7 +28,7 @@ public class UnityClient : MonoBehaviour {
     public void Host()
     {
         isHost = true;
-        Application.LoadLevel("Lobby");
+        SceneManager.LoadScene("Lobby");
         server = new Server();
 
         Debug.Log("starting server");
@@ -56,8 +59,8 @@ public class UnityClient : MonoBehaviour {
 	void Update () {
 
 
-        if (client != null && client.dataGottenFromServer != "")
-            Application.LoadLevel("Lobby");
+        if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name != "Lobby")
+            SceneManager.LoadScene("Lobby");
 
         if (server != null) {
             Debug.Log("server started and has " + server.clients.Count + " clients connected to the server");
