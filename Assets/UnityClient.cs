@@ -56,7 +56,7 @@ public class UnityClient : MonoBehaviour {
 	void Update () {
 
 
-        if (server != null && client.dataGottenFromServer != "")
+        if (client != null && client.dataGottenFromServer != "")
             Application.LoadLevel("Lobby");
 
         if (server != null) {
