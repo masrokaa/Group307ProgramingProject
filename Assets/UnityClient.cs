@@ -12,6 +12,9 @@ using UnityEngine.SceneManagement;
 public class UnityClient : MonoBehaviour {
     Server server;
     Client client;
+
+    public static int currentPlayer;
+
     public Text textGui;
     public static bool isHost = false;
 

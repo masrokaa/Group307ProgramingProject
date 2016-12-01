@@ -8,6 +8,8 @@ public class keepTrack : MonoBehaviour {
     double[,] blue = { { 2.79, -2.09 }, { 3.59, -2.93 }, { 2.82, -3.63 }, { 2.02, -2.86 }, { 3.06, 0.01 }, { 2.32, 0.01 }, { 1.58, 0.01 }, { 0.88, 0.01 }, { -0.05, 0.02 }, };
     double[,] yellow = { { -2.9, -3.63 }, { -3.64, -2.83 }, { -2.87, -2.09 }, { -2.13, -2.89 }, { -0.02, -3.12 }, { -0.02, -2.35 }, { -0.02, -1.68 }, { -0.02, -0.91 }, { -0.05, 0.02 }, };
 
+    public int currentPlayer = 1;
+
     public GameObject[] redPlayersPawns;
     public GameObject[] greenPlayersPawns;
     public GameObject[] yellowPlayersPawns;
@@ -15,8 +17,7 @@ public class keepTrack : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //Debug.Log(kordinator[0, 0]);
-        //Debug.Log(kordinator[0, 1]);
+        
 
         greenPlayersPawns[0].transform.position = (new Vector3((float)green[0, 0], (float)green[0, 1], 0));
         greenPlayersPawns[1].transform.position = (new Vector3((float)green[1, 0], (float)green[1, 1], 0));
@@ -39,8 +40,48 @@ public class keepTrack : MonoBehaviour {
         yellowPlayersPawns[3].transform.position = (new Vector3((float)yellow[3, 0], (float)yellow[3, 1], 0));
     }
 	
-	// Update is called once per frame
-	void Update () {
+    public bool IsThereAnActivePawn()
+    {
+        bool result = false;
+        if(currentPlayer == 1)
+            for (int i = 0; i < greenPlayersPawns.Length; i++)
+            {
+                if (greenPlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
+                    result = true;
+            }
+        else if (currentPlayer == 2)
+            for (int i = 0; i < redPlayersPawns.Length; i++)
+            {
+                if (redPlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
+                    result = true;
+            }
+        else if (currentPlayer == 3)
+            for (int i = 0; i < bluePlayersPawns.Length; i++)
+            {
+                if (bluePlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
+                    result = true;
+            }
+        else if (currentPlayer == 4)
+            for (int i = 0; i < yellowPlayersPawns.Length; i++)
+            {
+                if (yellowPlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
+                    result = true;
+            }
 
-	}
+        return result;
+
+    }
+    public void ReleasePawn()
+    {
+       if( UnityClient.currentPlayer == 1)
+        {
+            for (int i = 0; i < greenPlayersPawns.Length; i++)
+            {
+                //if (greenPlayersPawns[i].GetComponent<pawn>().isPawnActive == false)
+                  //  greenPlayersPawns[i].transform.position 
+                   
+            }
+        }
+    }
+
 }
