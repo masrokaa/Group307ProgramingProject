@@ -8,12 +8,24 @@ public class keepTrack : MonoBehaviour {
     double[,] blue = { { 2.79, -2.09 }, { 3.59, -2.93 }, { 2.82, -3.63 }, { 2.02, -2.86 }, { 3.06, 0.01 }, { 2.32, 0.01 }, { 1.58, 0.01 }, { 0.88, 0.01 }, { -0.05, 0.02 }, };
     double[,] yellow = { { -2.9, -3.63 }, { -3.64, -2.83 }, { -2.87, -2.09 }, { -2.13, -2.89 }, { -0.02, -3.12 }, { -0.02, -2.35 }, { -0.02, -1.68 }, { -0.02, -0.91 }, { -0.05, 0.02 }, };
 
-    double[,] BoardCoordinants = { {-4.05,0.8},{-3.24,0.8},{-2.44,0.8},{-1.66,0.8},{-0.85,0.8},{0.85,1.63},{0.85,2.43},{0.85,3.23},{0.85,3.9},{-0.02,4},
-            {0.75,4.03},{0.75,3.19},{0.75,2.42},{0.75,1.58},{0.75,0.81},{1.58,0.81},{2.38,0.81},{3.18,0.81},{3.95,0.81},{3.98,-0.02},
+    double[,] BoardCoordinants = { 
+        {-4.05,0.8},
+        {-3.24,0.8},
+        {-2.44,0.8},
+        {-1.66,0.8},
+        {-0.85,0.8},
+        {-0.85,1.63},
+        {-0.85,2.43},
+        {-0.85,3.23},
+        {-0.85,3.9},
+        {-0.02,4},
+        {0.75,4.03},
+        {0.75,3.19},
+        {0.75,2.42},{0.75,1.58},{0.75,0.81},{1.58,0.81},{2.38,0.81},{3.18,0.81},{3.95,0.81},{3.98,-0.02},
             {3.98,-0.79},{3.14,-0.82},{2.37,-0.85},{1.57,-0.85},{0.73,-0.85},{0.75,-1.62},{0.75,-2.42},{0.75,-3.22},{0.75,-4.02},{-0.01,-4.02},
             {-0.85,-4.02},{-0.85,-3.22},{-0.85,-2.38},{-0.85,-1.58},{-0.85,-0.78},{-1.62,-0.81},{-2.46,-0.81},{-3.26,-0.81},{-4.06,-0.81},{-4.06,-0.01},};
 
-    public int currentPlayer = 1;
+    
 
     public GameObject[] redPlayersPawns;
     public GameObject[] greenPlayersPawns;
@@ -48,31 +60,36 @@ public class keepTrack : MonoBehaviour {
     public bool IsThereAnActivePawn()
     {
         bool result = false;
-        if(currentPlayer == 1)
+        if(UnityClient.currentPlayer == 1)
             for (int i = 0; i < greenPlayersPawns.Length; i++)
             {
                 if (greenPlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
                     result = true;
+                break;
             }
-        else if (currentPlayer == 2)
+        else if (UnityClient.currentPlayer == 2)
             for (int i = 0; i < redPlayersPawns.Length; i++)
             {
                 if (redPlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
                     result = true;
+                break;
             }
-        else if (currentPlayer == 3)
+        else if (UnityClient.currentPlayer == 3)
             for (int i = 0; i < bluePlayersPawns.Length; i++)
             {
                 if (bluePlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
                     result = true;
+                break;
             }
-        else if (currentPlayer == 4)
+        else if (UnityClient.currentPlayer == 4)
             for (int i = 0; i < yellowPlayersPawns.Length; i++)
             {
                 if (yellowPlayersPawns[i].GetComponent<pawn>().isPawnActive == true)
                     result = true;
+                break;
             }
 
+        Debug.Log(result);
         return result;
 
     }
@@ -88,7 +105,7 @@ public class keepTrack : MonoBehaviour {
             {
                 if (greenPlayersPawns[i].GetComponent<pawn>().isPawnActive == false)
                 {
-                    Debug.Log("inactive pawn found");
+                    
                     greenPlayersPawns[i].transform.position =( new Vector3((float)BoardCoordinants[0, 0], (float)BoardCoordinants[0, 1], 0));
                     greenPlayersPawns[i].GetComponent<pawn>().isPawnActive = true;
                     break;
@@ -102,7 +119,7 @@ public class keepTrack : MonoBehaviour {
             {
                 if (redPlayersPawns[i].GetComponent<pawn>().isPawnActive == false)
                 {
-                    Debug.Log("inactive pawn found");
+                    
                     redPlayersPawns[i].transform.position = (new Vector3((float)BoardCoordinants[10, 0], (float)BoardCoordinants[10, 1], 0));
                     redPlayersPawns[i].GetComponent<pawn>().isPawnActive = true;
                     break;
@@ -116,7 +133,7 @@ public class keepTrack : MonoBehaviour {
             {
                 if (bluePlayersPawns[i].GetComponent<pawn>().isPawnActive == false)
                 {
-                    Debug.Log("inactive pawn found");
+                    
                     bluePlayersPawns[i].transform.position = (new Vector3((float)BoardCoordinants[20, 0], (float)BoardCoordinants[20, 1], 0));
                     bluePlayersPawns[i].GetComponent<pawn>().isPawnActive = true;
                     break;
@@ -130,9 +147,10 @@ public class keepTrack : MonoBehaviour {
             {
                 if (yellowPlayersPawns[i].GetComponent<pawn>().isPawnActive == false)
                 {
-                    Debug.Log("inactive pawn found");
+
                     yellowPlayersPawns[i].transform.position = (new Vector3((float)BoardCoordinants[30, 0], (float)BoardCoordinants[30, 1], 0));
                     yellowPlayersPawns[i].GetComponent<pawn>().isPawnActive = true;
+                    
                     break;
                 }
 
@@ -145,7 +163,11 @@ public class keepTrack : MonoBehaviour {
 
     public void MovePawn(GameObject pawn, int move)
     {
-        pawn.GetComponent<pawn>().position += move;
-       // pawn.transform.position = new Vector3((float)BoardCoordinants[])
+
+
+        pawn.GetComponent<pawn>().addToPos(1);
+        Debug.Log(pawn.GetComponent<pawn>().Position % 40);
+
+        pawn.transform.position = new Vector3((float)BoardCoordinants[(pawn.GetComponent<pawn>().Position)%40, 0], (float)BoardCoordinants[(pawn.GetComponent<pawn>().Position) % 40, 1], 0);
     }
 }
