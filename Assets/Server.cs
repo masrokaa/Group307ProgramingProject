@@ -10,7 +10,7 @@ using System.Threading;
 public class Server  {
     Thread server;
     public List<Thread> clients = new List<Thread>();
-    public string dataToSend = "none";
+    public string dataToSend = "1";
 
     public string storedData = "none";
 
@@ -38,7 +38,7 @@ public class Server  {
             Thread temp = new Thread(clientThread);
             temp.Start(client);
             clients.Add(temp);
-
+            dataToSend = clients.Count.ToString();
             
           
         }

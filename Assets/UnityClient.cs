@@ -70,8 +70,13 @@ public class UnityClient : MonoBehaviour {
 
     public int GetNumberOfPlayersInLobby()
     {
+        
         int number = 1;
-        number += server.clients.Count;
+
+        if (isHost)
+            number += server.clients.Count;
+        else
+            number += int.Parse(client.dataGottenFromServer);
         return number;
     }
 

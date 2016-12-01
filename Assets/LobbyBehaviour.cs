@@ -30,7 +30,10 @@ public class LobbyBehaviour : MonoBehaviour {
 
         Debug.Log("updating players");
         int numberOfPlayers = 0;
+      
         numberOfPlayers = multiplayerInfo.GetNumberOfPlayersInLobby();
+      
+
         if (numberOfPlayers > 0)
             player1.text = "Green Player";
         else
