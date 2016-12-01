@@ -16,7 +16,8 @@ public class TurnManager : MonoBehaviour {
     public  void DiceRolled()
     {
         diceRolls++;
-        
+        selectedPawn.GetComponent<pawn>().isPawnActive = true;
+        keeptrack.MovePawn(selectedPawn, (int)Dice.diceroll);
 
         player.text = "Outcome " + Dice.diceroll;
         if (diceRolls > 99)
@@ -26,19 +27,21 @@ public class TurnManager : MonoBehaviour {
             {
                 if (keeptrack.IsThereAnActivePawn())
                 {
+
                     action.text = "Choose Pawn to move";
+                    
 
                 }
                 else if (diceRolls < 3)
                     action.text = "Roll Again";
 
             }
-            else if (keeptrack.IsThereAnActivePawn())
+            else if (keeptrack.IsThereAnActivePawn() == true)
                 action.text = "choose pawn to move or release a pawn";
             else
             {
                 action.text = "pawn released";
-                keeptrack.ReleasePawn();
+               // keeptrack.ReleasePawn();
             }
                 
 
