@@ -8,6 +8,8 @@ public class getPawnOut : MonoBehaviour {
     double[,] blue = { { 2.79, -2.09 }, { 3.59, -2.93 }, { 2.82, -3.63 }, { 2.02, -2.86 }, { 3.06, 0.01 }, { 2.32, 0.01 }, { 1.58, 0.01 }, { 0.88, 0.01 }, { -0.05, 0.02 }, };
     double[,] yellow = { { -2.9, -3.63 }, { -3.64, -2.83 }, { -2.87, -2.09 }, { -2.13, -2.89 }, { -0.02, -3.12 }, { -0.02, -2.35 }, { -0.02, -1.68 }, { -0.02, -0.91 }, { -0.05, 0.02 }, };
 
+
+
     // Use this for initialization
     void Start () {
 	
@@ -17,4 +19,12 @@ public class getPawnOut : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void getPawnActive()
+    {
+        if (Dice.diceroll == 6)
+        {
+
+        }
+    }
 }
