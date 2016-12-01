@@ -14,10 +14,7 @@ public class whoPlays : MonoBehaviour {
         if (Dice.diceroll < 6)
         {
             currentPlayer++;
-            if (currentPlayer == 5)
-            {
-                currentPlayer = 1;
-            }
+
         }
             player.text = "player " + currentPlayer;
     }
