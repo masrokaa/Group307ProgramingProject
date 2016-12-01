@@ -27,12 +27,13 @@ public class mainMenu : MonoBehaviour {
 
                 if (GUI.Button(new Rect(Screen.width / 2.5f, 200, 130, 50), "Host"))
                 {
-                    cases = 1;
+                    cases = 1;     
                 }
-
+       
                 if (GUI.Button(new Rect(Screen.width / 2.5f, 300, 130, 50), "Server"))
                 {
                     cases = 2;
+                    
                 }
 
                 if (GUI.Button(new Rect(Screen.width / 2.5f, 400, 130, 50), "Rules"))
@@ -53,6 +54,10 @@ public class mainMenu : MonoBehaviour {
                     if (GUI.Button(new Rect(Screen.width / 2.5f, 500, 130, 50), "Back"))
                 {
                     cases = 0;
+                }
+                else
+                {
+                    Application.LoadLevel("HostJoin");
                 }
 
                 break;
@@ -89,12 +94,15 @@ public class mainMenu : MonoBehaviour {
                 {
                     cases = 0;
                 }      
-
+                else
+                {
+                    Application.LoadLevel("Lobby");
+                }
                 break;
 
             case 5:
 
-                if (GUI.Button(new Rect(Screen.width / 2.5f+50, 510, 100, 30), "Exit"))
+                if (GUI.Button(new Rect(Screen.width / 2.5f+50, 510, 100, 30), "Back"))
                 {
                     cases = 0;
 
