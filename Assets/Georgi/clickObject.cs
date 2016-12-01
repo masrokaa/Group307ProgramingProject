@@ -6,6 +6,7 @@ public class clickObject : MonoBehaviour {
 
     public int mouseClicks;
     public string componentName;
+    Texture2D outline;
 
     // Use this for initialization
     void Start () {
@@ -24,6 +25,8 @@ public class clickObject : MonoBehaviour {
             mouseClicks += 1;
             Debug.Log("The " + this.gameObject.name + " was clicked");
             componentName = this.gameObject.name;
+            GameObject.Find("outline").transform.position = this.gameObject.transform.position;
+            
         }
     }
 
