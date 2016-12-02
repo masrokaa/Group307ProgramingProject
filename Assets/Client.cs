@@ -41,15 +41,20 @@ public class Client  {
         while (true)
         {
 
-            if(writeToserver)
-            writer.WriteLine(dataToSend);
-            else
             dataGottenFromServer = reader.ReadLine();
+
+            writer.WriteLine(dataToSend);
+          
+            dataToSend = dataGottenFromServer;
             
 
                
         }
     }
 
-    
+    public void updateData(string data)
+    {
+        dataGottenFromServer = data;
+        dataToSend = data;
+    }
 }

@@ -15,12 +15,14 @@ public class UnityClient : MonoBehaviour {
     string[] shardData = new string[18];
     public string sharedDataString;
     public static int numberOfPlayers;
-    public static int currentPlayer=4;
+    public static int currentPlayer=1;
     public static int[] player1PawnPos = new int[4];
     public static int[] player2PawnPos = new int[4];
     public static int[] player3PawnPos = new int[4];
     public static int[] player4PawnPos = new int[4];
     public static string gameStarted;
+
+    TurnManager turnManager = null;
 
 
 
@@ -46,7 +48,7 @@ public class UnityClient : MonoBehaviour {
 
         Debug.Log("starting server");
        
-        server.StartServer("1,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0"+",0");
+        server.StartServer("1,1," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0"+",0");
 
         
     }
@@ -74,6 +76,8 @@ public class UnityClient : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(SceneManager.GetActiveScene().name == "gameScene" && turnManager == null)
+            turnManager = (TurnManager)GameObject.FindObjectOfType<TurnManager>();
 
         if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name == "HostJoin")
             SceneManager.LoadScene("Lobby");
@@ -92,12 +96,7 @@ public class UnityClient : MonoBehaviour {
         */
     }
 
-   void convertString()
-    {
-       
-
-
-    }
+   
 
     public void UpdateSharedInfo()
     {
@@ -160,5 +159,32 @@ public class UnityClient : MonoBehaviour {
         server.updateData(sharedDataString);
     }
 
+    public void nextPlayerAndUpdate()
+    {
+
+        shardData[1] = (currentPlayer + 1 % numberOfPlayers) + "";
+        sharedDataString = "";
+        for (int i = 0; i < shardData.Length; i++)
+        {
+            if (i == shardData.Length - 1)
+                sharedDataString += shardData[i];
+            else
+                sharedDataString += shardData[i] + ",";
+        }
+
+        if (isHost)
+        {
+            server.updateData(sharedDataString);
+        }
+        else
+        {
+            client.updateData(sharedDataString);
+        }
+        UpdateSharedInfo();
+        if (currentPlayer == TurnManager.thisPlayer)
+            turnManager.newTurn();
+        
+    }
+    
 
 }

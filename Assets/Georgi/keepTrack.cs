@@ -89,7 +89,7 @@ public class keepTrack : MonoBehaviour {
                 break;
             }
 
-        Debug.Log(result);
+
         return result;
 
     }

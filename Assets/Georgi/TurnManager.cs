@@ -3,12 +3,16 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class TurnManager : MonoBehaviour {
-    public static int thisPlayer=0;
+    public static int thisPlayer=1;
 
     public GameObject button;
     public Text player;
     public Text action;
     public keepTrack keeptrack;
+
+    UnityClient multiplayerInfo;
+
+
 
     public static GameObject selectedPawn = null;
 
@@ -48,7 +52,7 @@ public class TurnManager : MonoBehaviour {
             else if (keeptrack.IsThereAnActivePawn() == true)
             {
                 button.SetActive(false);
-                action.text = "choose pawn to move or release a pawn";
+                action.text = "move or release a pawn";
             clickObject.Selectable = true;
             waitingToSelectPawn = true;
 
@@ -81,15 +85,21 @@ public class TurnManager : MonoBehaviour {
 
     public void newTurn()
     {
-        
+        Debug.Log("new turn dawned");
+
         button.SetActive(true);
-       
+        action.text = "Roll Dice";
     }
     public void endTurn()
     {
+        Dice.diceroll = 0;
+        diceRolls = 0;
+     
+       
         button.SetActive(false);
         action.text = "player " + UnityClient.currentPlayer + " turn";
         Debug.Log("New players Turn");
+        multiplayerInfo.nextPlayerAndUpdate();
     }
 
     void releasePawn()
@@ -108,14 +118,31 @@ public class TurnManager : MonoBehaviour {
     {
         if (selectedPawn.GetComponent<pawn>().isPawnActive)
             movePawn();
-        else
+        else {
             releasePawn();
+            clickObject.Selectable = false;
+            clickObject.excludeInactivePawn = false;
+            button.SetActive(true);
+        }
     }
 
 	// Use this for initialization
 	void Start () {
-       
+        Debug.Log("current player"+UnityClient.currentPlayer+" number of players "+UnityClient.numberOfPlayers);
+        Debug.Log((UnityClient.currentPlayer+1 % UnityClient.numberOfPlayers));
 
+        multiplayerInfo = (UnityClient)GameObject.FindObjectOfType<UnityClient>();
+        if (thisPlayer != UnityClient.currentPlayer)
+        {
+            button.SetActive(false);
+
+            //this need to say the color of the player instead
+            action.text = "Current Player " + UnityClient.currentPlayer;
+        }
+        else
+        {
+            newTurn();
+        }
 
 
     }
@@ -125,10 +152,13 @@ public class TurnManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        
+
         if (waitingToSelectPawn && selectedPawn !=null)
         {
             doPawnAction();
         }
+      
 
 	}
 }
