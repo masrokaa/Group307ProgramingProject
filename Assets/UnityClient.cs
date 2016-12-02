@@ -20,6 +20,7 @@ public class UnityClient : MonoBehaviour {
     public static int[] player2PawnPos = new int[4];
     public static int[] player3PawnPos = new int[4];
     public static int[] player4PawnPos = new int[4];
+    public static string gameStarted;
 
 
 
@@ -45,7 +46,7 @@ public class UnityClient : MonoBehaviour {
 
         Debug.Log("starting server");
        
-        server.StartServer("1,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0");
+        server.StartServer("1,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0"+",0");
 
         
     }
@@ -102,7 +103,7 @@ public class UnityClient : MonoBehaviour {
     
 
         numberOfPlayers = int.Parse(shardData[0]);
-        /*
+        
         currentPlayer = int.Parse(shardData[1]);
         player1PawnPos[0] = int.Parse(shardData[2]);
         player1PawnPos[1] = int.Parse(shardData[3]);
@@ -121,7 +122,9 @@ public class UnityClient : MonoBehaviour {
         player4PawnPos[2] = int.Parse(shardData[16]);
         player4PawnPos[3] = int.Parse(shardData[17]);
 
-    */
+        gameStarted = shardData[18];
+
+
     }
 
     public void getDataFromServerOrClient()
@@ -137,6 +140,19 @@ public class UnityClient : MonoBehaviour {
 
     }
 
+    public void StartGame()
+    {
+        shardData[18] = "1";
+        for (int i = 0; i < shardData.Length; i++)
+        {
+            if (i == shardData.Length - 1)
+                sharedDataString += shardData[i];
+            else
+                sharedDataString += shardData[i] + ",";
+        }
+
+        server.updateData(sharedDataString);
+    }
 
 
 }

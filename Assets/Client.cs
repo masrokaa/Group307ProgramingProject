@@ -6,6 +6,9 @@ using System.Threading;
 
 public class Client  {
 
+    public bool writeToserver = false;
+   
+
     Thread client;
     public string dataGottenFromServer = "";
     string ipAdress;
@@ -38,9 +41,11 @@ public class Client  {
         while (true)
         {
 
-
+            if(writeToserver)
+            writer.WriteLine(dataToSend);
+            else
             dataGottenFromServer = reader.ReadLine();
-            //writer.WriteLine(dataToSend);
+            
 
                
         }

@@ -12,7 +12,7 @@ public class Server  {
     public List<Thread> clients = new List<Thread>();
     public string dataToSend = "1";
 
-
+    public bool writeToClients = true;
     
 
     public string storedData = "none";
@@ -74,17 +74,23 @@ public class Server  {
 
         while (true)
         {
-
-            writer.WriteLine(dataToSend);
-
-            //storedData = reader.ReadLine();
-
-
+            if (writeToClients)
+                writer.WriteLine(dataToSend);
+            else {
+                storedData = reader.ReadLine();
+                dataToSend = storedData;
+            }
 
 
 
 
         }
+    }
+
+    public void updateData(string data)
+    {
+        storedData = data;
+        dataToSend = data;
     }
 
 }

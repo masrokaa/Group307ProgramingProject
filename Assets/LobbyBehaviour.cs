@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyBehaviour : MonoBehaviour {
     public Text player1, player2, player3, player4;
     bool ishost;
     float passedTime = 0;
+    public GameObject button;
+
     UnityClient multiplayerInfo;
 
 	// Use this for initialization
@@ -16,11 +19,11 @@ public class LobbyBehaviour : MonoBehaviour {
 
 
         ishost = UnityClient.isHost;
-        if (ishost)
+        if (ishost) 
             TurnManager.thisPlayer = 1;
         else
         {
-           
+            button.SetActive(false);
             multiplayerInfo.UpdateSharedInfo();
             TurnManager.thisPlayer = UnityClient.numberOfPlayers;
         }
@@ -43,7 +46,11 @@ public class LobbyBehaviour : MonoBehaviour {
 
 	}
 
-    
+   public void startThegame()
+    {
+        SceneManager.LoadScene("gameScene");
+        multiplayerInfo.StartGame();
+    }
 
     void updatePlayers()
     {
@@ -53,7 +60,9 @@ public class LobbyBehaviour : MonoBehaviour {
         multiplayerInfo.UpdateSharedInfo();
         numberOfPlayers = UnityClient.numberOfPlayers;
         Debug.Log(numberOfPlayers);
-      
+
+      if(UnityClient.gameStarted == "1")
+            SceneManager.LoadScene("gameScene");
 
         if (numberOfPlayers > 0)
             player1.text = "Green Player";
