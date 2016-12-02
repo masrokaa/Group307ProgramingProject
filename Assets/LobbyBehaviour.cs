@@ -33,20 +33,20 @@ public class LobbyBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
-       /* passedTime += Time.deltaTime;
-=======
+
+        passedTime += Time.deltaTime;
+
 
 
 
         passedTime += Time.deltaTime;
->>>>>>> origin/master
+
         if (passedTime > 1)
         {
             Debug.Log("you are player " + TurnManager.thisPlayer);
             updatePlayers();
             passedTime = 0;
-        } */
+        } 
 
 	}
 
