@@ -99,25 +99,24 @@ public class UnityClient : MonoBehaviour {
 
         numberOfPlayers = int.Parse(shardData[0]);
         currentPlayer = int.Parse(shardData[1]);
-        for (int i = 2; i < 2+4; i++)
-        {
-            player1PawnPos[i] = int.Parse(shardData[i]);
-        }
-        for (int i = 6; i < 6 + 4; i++)
-        {
-            player2PawnPos[i] = int.Parse(shardData[i]);
-        }
-        for (int i = 10; i < 10 + 4; i++)
-        {
-            player3PawnPos[i] = int.Parse(shardData[i]);
-        }
-        for (int i = 14; i < 14 + 4; i++)
-        {
-            player4PawnPos[i] = int.Parse(shardData[i]);
-        }
+        player1PawnPos[0] = int.Parse(shardData[2]);
+        player1PawnPos[1] = int.Parse(shardData[3]);
+        player1PawnPos[2] = int.Parse(shardData[4]);
+        player1PawnPos[3] = int.Parse(shardData[5]);
+        player2PawnPos[0] = int.Parse(shardData[6]);
+        player2PawnPos[1] = int.Parse(shardData[7]);
+        player2PawnPos[2] = int.Parse(shardData[8]);
+        player2PawnPos[3] = int.Parse(shardData[9]);
+        player3PawnPos[0] = int.Parse(shardData[10]);
+        player3PawnPos[1] = int.Parse(shardData[11]);
+        player3PawnPos[2] = int.Parse(shardData[12]);
+        player3PawnPos[3] = int.Parse(shardData[13]);
+        player4PawnPos[0] = int.Parse(shardData[14]);
+        player4PawnPos[1] = int.Parse(shardData[15]);
+        player4PawnPos[2] = int.Parse(shardData[16]);
+        player4PawnPos[3] = int.Parse(shardData[17]);
 
 
-        
     }
 
     public void getDataFromServerOrClient()

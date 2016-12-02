@@ -20,7 +20,7 @@ public class LobbyBehaviour : MonoBehaviour {
             TurnManager.thisPlayer = 1;
         else
         {
-            multiplayerInfo.getDataFromServerOrClient();
+           
             multiplayerInfo.UpdateSharedInfo();
             TurnManager.thisPlayer = UnityClient.numberOfPlayers;
         }
@@ -50,7 +50,7 @@ public class LobbyBehaviour : MonoBehaviour {
 
         Debug.Log("updating players");
         int numberOfPlayers = 0;
-
+        multiplayerInfo.UpdateSharedInfo();
         numberOfPlayers = UnityClient.numberOfPlayers;
       
 
