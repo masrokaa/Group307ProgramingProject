@@ -13,7 +13,7 @@ public class UnityClient : MonoBehaviour {
     Server server;
     Client client;
     string[] shardData = new string[18];
-    string sharedDataString;
+    public string sharedDataString;
     public static int numberOfPlayers;
     public static int currentPlayer=4;
     public static int[] player1PawnPos = new int[4];
@@ -143,6 +143,7 @@ public class UnityClient : MonoBehaviour {
     public void StartGame()
     {
         shardData[18] = "1";
+        sharedDataString = "";
         for (int i = 0; i < shardData.Length; i++)
         {
             if (i == shardData.Length - 1)

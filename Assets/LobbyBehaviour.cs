@@ -48,8 +48,9 @@ public class LobbyBehaviour : MonoBehaviour {
 
    public void startThegame()
     {
-        SceneManager.LoadScene("gameScene");
         multiplayerInfo.StartGame();
+        //SceneManager.LoadScene("gameScene");
+       
     }
 
     void updatePlayers()
@@ -60,6 +61,7 @@ public class LobbyBehaviour : MonoBehaviour {
         multiplayerInfo.UpdateSharedInfo();
         numberOfPlayers = UnityClient.numberOfPlayers;
         Debug.Log(numberOfPlayers);
+        Debug.Log(multiplayerInfo.sharedDataString);
 
       if(UnityClient.gameStarted == "1")
             SceneManager.LoadScene("gameScene");
