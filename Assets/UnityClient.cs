@@ -85,15 +85,16 @@ public class UnityClient : MonoBehaviour {
         if (client != null && gameStarted == "1" && SceneManager.GetActiveScene().name == "Lobby")
          SceneManager.LoadScene("gameScene");
 
-        
 
 
-
-        /*
-        if (server != null) {
-            Debug.Log("server started and has " + server.clients.Count + " clients connected to the server");
-        }
-        */
+        if (currentPlayer == TurnManager.thisPlayer && client != null)
+            client.writeToserver = true;
+        else
+            client.writeToserver = false;
+        if (server != null && currentPlayer == 1)
+            server.writeToclients = true;
+        else
+            server.writeToclients = false;
     }
 
    
