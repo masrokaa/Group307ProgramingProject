@@ -22,6 +22,9 @@ public class UnityClient : MonoBehaviour {
     public static int[] player4PawnPos = new int[4];
     public static string gameStarted;
 
+    float timepassed = 0;
+
+
     TurnManager turnManager = null;
 
 
@@ -76,6 +79,15 @@ public class UnityClient : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        timepassed += Time.deltaTime;
+        if(timepassed >= 1)
+        {
+            UpdateSharedInfo();
+            if (currentPlayer == TurnManager.thisPlayer)
+                turnManager.newTurn();
+        }
+
+
         if(SceneManager.GetActiveScene().name == "gameScene" && turnManager == null)
             turnManager = (TurnManager)GameObject.FindObjectOfType<TurnManager>();
 
@@ -95,6 +107,9 @@ public class UnityClient : MonoBehaviour {
             server.writeToclients = true;
         else if(server != null)
             server.writeToclients = false;
+
+
+
     }
 
    
@@ -162,7 +177,7 @@ public class UnityClient : MonoBehaviour {
 
     public void nextPlayerAndUpdate()
     {
-
+        UpdateSharedInfo();
         shardData[1] = (currentPlayer + 1 % numberOfPlayers) + "";
         sharedDataString = "";
         for (int i = 0; i < shardData.Length; i++)
@@ -182,8 +197,7 @@ public class UnityClient : MonoBehaviour {
             client.updateData(sharedDataString);
         }
         UpdateSharedInfo();
-        if (currentPlayer == TurnManager.thisPlayer)
-            turnManager.newTurn();
+        
         
     }
     
