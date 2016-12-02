@@ -82,9 +82,13 @@ public class UnityClient : MonoBehaviour {
         timepassed += Time.deltaTime;
         if(timepassed >= 1)
         {
-            UpdateSharedInfo();
-            if (currentPlayer == TurnManager.thisPlayer)
+
+            if (currentPlayer == TurnManager.thisPlayer && turnManager != null)
+            {
                 turnManager.newTurn();
+                UpdateSharedInfo();
+            }
+            timepassed = 0;
         }
 
 
@@ -153,7 +157,7 @@ public class UnityClient : MonoBehaviour {
         {
            sharedDataString = server.storedData;
         }
-        else
+        else if(client != null)
         {
             sharedDataString = client.dataGottenFromServer;
         }
