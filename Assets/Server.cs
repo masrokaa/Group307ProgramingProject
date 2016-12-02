@@ -12,6 +12,9 @@ public class Server  {
     public List<Thread> clients = new List<Thread>();
     public string dataToSend = "1";
 
+
+    
+
     public string storedData = "none";
 
     public void StartServer( string data)
@@ -40,13 +43,7 @@ public class Server  {
             Thread temp = new Thread(clientThread);
             temp.Start(client);
             clients.Add(temp);
-            string[] divdedData = storedData.Split(","[0]);
-            divdedData[0] = (int.Parse(divdedData[0]) + 1)+"";
-            storedData = "";
-            for (int i = 0; i < divdedData.Length; i++)
-            {
-                storedData += divdedData[i];
-            }
+           
             dataToSend = storedData;
             
           
