@@ -89,11 +89,11 @@ public class UnityClient : MonoBehaviour {
 
         if (currentPlayer == TurnManager.thisPlayer && client != null)
             client.writeToserver = true;
-        else
+        else if(client != null)
             client.writeToserver = false;
         if (server != null && currentPlayer == 1)
             server.writeToclients = true;
-        else
+        else if(server != null)
             server.writeToclients = false;
     }
 
