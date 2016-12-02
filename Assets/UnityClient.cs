@@ -87,7 +87,7 @@ public class UnityClient : MonoBehaviour {
 
    void convertString()
     {
-        shardData = sharedDataString.Split(","[0]);
+       
 
 
     }
@@ -95,9 +95,16 @@ public class UnityClient : MonoBehaviour {
     public void UpdateSharedInfo()
     {
         getDataFromServerOrClient();
-        convertString();
+
+        Debug.Log(sharedDataString);
+        shardData = sharedDataString.Split(","[0]);
+        for (int i = 0; i < shardData.Length; i++)
+        {
+            Debug.Log(shardData[i]);
+        }
 
         numberOfPlayers = int.Parse(shardData[0]);
+        /*
         currentPlayer = int.Parse(shardData[1]);
         player1PawnPos[0] = int.Parse(shardData[2]);
         player1PawnPos[1] = int.Parse(shardData[3]);
@@ -116,7 +123,7 @@ public class UnityClient : MonoBehaviour {
         player4PawnPos[2] = int.Parse(shardData[16]);
         player4PawnPos[3] = int.Parse(shardData[17]);
 
-
+    */
     }
 
     public void getDataFromServerOrClient()
