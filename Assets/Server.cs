@@ -12,10 +12,15 @@ public class Server  {
     public List<Thread> clients = new List<Thread>();
     public string dataToSend = "1";
 
+    public bool writeToClients = true;
+    
+
     public string storedData = "none";
 
-    public void StartServer()
+    public void StartServer( string data)
     {
+        storedData = data;
+        dataToSend = data;
         server = new Thread(Run);
         server.Start();
 
@@ -38,9 +43,11 @@ public class Server  {
             Thread temp = new Thread(clientThread);
             temp.Start(client);
             clients.Add(temp);
-            dataToSend = clients.Count.ToString();
-            
+
           
+
+
+
         }
 
       
@@ -52,19 +59,38 @@ public class Server  {
         StreamWriter writer = new StreamWriter(stream, Encoding.ASCII) { AutoFlush = true };
         StreamReader reader = new StreamReader(stream, Encoding.ASCII);
 
+        string[] tempstring = storedData.Split(","[0]);
+        tempstring[0] = (clients.Count + 1) + "";
+        storedData = "";
+        for (int i = 0; i < tempstring.Length; i++)
+        {
+            if (i == tempstring.Length - 1)
+                storedData += tempstring[i];
+            else
+                storedData += tempstring[i] + ",";
+        }
+        dataToSend = storedData;
+
+
         while (true)
         {
-
-            writer.WriteLine(dataToSend);
-
-            storedData = reader.ReadLine();
-
-
+            if (writeToClients)
+                writer.WriteLine(dataToSend);
+            else {
+                storedData = reader.ReadLine();
+                dataToSend = storedData;
+            }
 
 
 
 
         }
+    }
+
+    public void updateData(string data)
+    {
+        storedData = data;
+        dataToSend = data;
     }
 
 }

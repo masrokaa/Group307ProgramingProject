@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class TurnManager : MonoBehaviour {
+    public static int thisPlayer=0;
 
     public GameObject button;
     public Text player;
@@ -113,7 +114,13 @@ public class TurnManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+       
+
+
+
     }
+
+    
 	
 	// Update is called once per frame
 	void Update () {

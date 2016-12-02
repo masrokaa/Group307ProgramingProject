@@ -12,9 +12,18 @@ using UnityEngine.SceneManagement;
 public class UnityClient : MonoBehaviour {
     Server server;
     Client client;
-
+    string[] shardData = new string[18];
+    public string sharedDataString;
+    public static int numberOfPlayers;
     public static int currentPlayer=4;
-    
+    public static int[] player1PawnPos = new int[4];
+    public static int[] player2PawnPos = new int[4];
+    public static int[] player3PawnPos = new int[4];
+    public static int[] player4PawnPos = new int[4];
+    public static string gameStarted;
+
+
+
 
     public Text textGui;
     public static bool isHost = false;
@@ -36,7 +45,10 @@ public class UnityClient : MonoBehaviour {
         server = new Server();
 
         Debug.Log("starting server");
-        server.StartServer();
+       
+        server.StartServer("1,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0"+",0");
+
+        
     }
 
    
@@ -63,8 +75,16 @@ public class UnityClient : MonoBehaviour {
 	void Update () {
 
 
-        if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name != "Lobby")
+        if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name == "HostJoin")
             SceneManager.LoadScene("Lobby");
+
+        if (client != null && gameStarted == "1" && SceneManager.GetActiveScene().name == "Lobby")
+         SceneManager.LoadScene("gameScene");
+
+        
+
+
+
         /*
         if (server != null) {
             Debug.Log("server started and has " + server.clients.Count + " clients connected to the server");
@@ -72,16 +92,72 @@ public class UnityClient : MonoBehaviour {
         */
     }
 
-    public int GetNumberOfPlayersInLobby()
+   void convertString()
     {
-        
-        int number = 1;
+       
 
+
+    }
+
+    public void UpdateSharedInfo()
+    {
+        getDataFromServerOrClient();
+
+
+        shardData = sharedDataString.Split(","[0]);
+    
+
+        numberOfPlayers = int.Parse(shardData[0]);
+        
+        currentPlayer = int.Parse(shardData[1]);
+        player1PawnPos[0] = int.Parse(shardData[2]);
+        player1PawnPos[1] = int.Parse(shardData[3]);
+        player1PawnPos[2] = int.Parse(shardData[4]);
+        player1PawnPos[3] = int.Parse(shardData[5]);
+        player2PawnPos[0] = int.Parse(shardData[6]);
+        player2PawnPos[1] = int.Parse(shardData[7]);
+        player2PawnPos[2] = int.Parse(shardData[8]);
+        player2PawnPos[3] = int.Parse(shardData[9]);
+        player3PawnPos[0] = int.Parse(shardData[10]);
+        player3PawnPos[1] = int.Parse(shardData[11]);
+        player3PawnPos[2] = int.Parse(shardData[12]);
+        player3PawnPos[3] = int.Parse(shardData[13]);
+        player4PawnPos[0] = int.Parse(shardData[14]);
+        player4PawnPos[1] = int.Parse(shardData[15]);
+        player4PawnPos[2] = int.Parse(shardData[16]);
+        player4PawnPos[3] = int.Parse(shardData[17]);
+
+        gameStarted = shardData[18];
+
+
+    }
+
+    public void getDataFromServerOrClient()
+    {
         if (isHost)
-            number += server.clients.Count;
+        {
+           sharedDataString = server.storedData;
+        }
         else
-            number += int.Parse(client.dataGottenFromServer);
-        return number;
+        {
+            sharedDataString = client.dataGottenFromServer;
+        }
+
+    }
+
+    public void StartGame()
+    {
+        shardData[18] = "1";
+        sharedDataString = "";
+        for (int i = 0; i < shardData.Length; i++)
+        {
+            if (i == shardData.Length - 1)
+                sharedDataString += shardData[i];
+            else
+                sharedDataString += shardData[i] + ",";
+        }
+
+        server.updateData(sharedDataString);
     }
 
 
