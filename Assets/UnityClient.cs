@@ -82,9 +82,12 @@ public class UnityClient : MonoBehaviour {
         timepassed += Time.deltaTime;
         if(timepassed >= 1)
         {
+            Debug.Log(currentPlayer);
+            
 
             if (currentPlayer == TurnManager.thisPlayer && turnManager != null)
             {
+                Debug.Log("updating");
                 turnManager.newTurn();
                 UpdateSharedInfo();
             }
