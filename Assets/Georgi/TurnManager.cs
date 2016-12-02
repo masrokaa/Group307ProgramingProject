@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TurnManager : MonoBehaviour {
 
-    
+    public GameObject button;
     public Text player;
     public Text action;
     public keepTrack keeptrack;
@@ -15,9 +15,11 @@ public class TurnManager : MonoBehaviour {
 
     public  void DiceRolled()
     {
+
+        Debug.Log("you rolled "+Dice.diceroll);
         diceRolls++;
-        selectedPawn.GetComponent<pawn>().isPawnActive = true;
-        keeptrack.MovePawn(selectedPawn, (int)Dice.diceroll);
+        
+       
 
         player.text = "Outcome " + Dice.diceroll;
         if (diceRolls > 99)
@@ -27,9 +29,9 @@ public class TurnManager : MonoBehaviour {
             {
                 if (keeptrack.IsThereAnActivePawn())
                 {
-
+                    button.SetActive(false);
                     action.text = "Choose Pawn to move";
-                    
+                    keeptrack.MovePawn(selectedPawn, (int)Dice.diceroll);
 
                 }
                 else if (diceRolls < 3)
@@ -49,6 +51,14 @@ public class TurnManager : MonoBehaviour {
 
     }
 
+    public void newTurn()
+    {
+
+    }
+    public void endTurn()
+    {
+
+    }
 
     void releasePawn()
     {
