@@ -40,7 +40,7 @@ public class Client  {
 
 
             dataGottenFromServer = reader.ReadLine();
-            writer.WriteLine(dataToSend);
+            //writer.WriteLine(dataToSend);
 
                
         }
