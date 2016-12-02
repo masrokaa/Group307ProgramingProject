@@ -43,10 +43,21 @@ public class Server  {
             Thread temp = new Thread(clientThread);
             temp.Start(client);
             clients.Add(temp);
-           
+
+            string[] tempstring = storedData.Split(","[0]);
+            tempstring[0] = (int.Parse(tempstring[0]) + 1) + "";
+            storedData = "";
+            for (int i = 0; i < tempstring.Length; i++)
+            {
+                if (i == tempstring.Length - 1)
+                    storedData += tempstring[i];
+                else
+                    storedData += tempstring[i] + ",";
+            }
             dataToSend = storedData;
-            
-          
+
+
+
         }
 
       
@@ -57,6 +68,9 @@ public class Server  {
         NetworkStream stream = client.GetStream();
         StreamWriter writer = new StreamWriter(stream, Encoding.ASCII) { AutoFlush = true };
         StreamReader reader = new StreamReader(stream, Encoding.ASCII);
+       
+
+
 
         while (true)
         {

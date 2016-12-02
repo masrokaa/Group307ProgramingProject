@@ -44,6 +44,7 @@ public class UnityClient : MonoBehaviour {
         server = new Server();
 
         Debug.Log("starting server");
+       
         server.StartServer("1,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0");
 
         
@@ -96,12 +97,9 @@ public class UnityClient : MonoBehaviour {
     {
         getDataFromServerOrClient();
 
-        Debug.Log(sharedDataString);
+
         shardData = sharedDataString.Split(","[0]);
-        for (int i = 0; i < shardData.Length; i++)
-        {
-            Debug.Log(shardData[i]);
-        }
+    
 
         numberOfPlayers = int.Parse(shardData[0]);
         /*

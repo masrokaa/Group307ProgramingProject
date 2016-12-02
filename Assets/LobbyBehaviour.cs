@@ -50,8 +50,9 @@ public class LobbyBehaviour : MonoBehaviour {
 
         Debug.Log("updating players");
         int numberOfPlayers = 0;
-        
+        multiplayerInfo.UpdateSharedInfo();
         numberOfPlayers = UnityClient.numberOfPlayers;
+        Debug.Log(numberOfPlayers);
       
 
         if (numberOfPlayers > 0)
