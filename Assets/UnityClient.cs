@@ -75,8 +75,13 @@ public class UnityClient : MonoBehaviour {
 	void Update () {
 
 
-        if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name != "Lobby")
+        if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name == "HostJoin")
             SceneManager.LoadScene("Lobby");
+
+        if (client != null && gameStarted == "1" && SceneManager.GetActiveScene().name == "Lobby")
+         SceneManager.LoadScene("gameScene");
+
+        
 
 
 

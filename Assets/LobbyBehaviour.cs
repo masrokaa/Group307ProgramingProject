@@ -63,8 +63,12 @@ public class LobbyBehaviour : MonoBehaviour {
         Debug.Log(numberOfPlayers);
         Debug.Log(multiplayerInfo.sharedDataString);
 
-      if(UnityClient.gameStarted == "1")
+        if (UnityClient.gameStarted == "1" && SceneManager.GetActiveScene().name == "Lobby")
+        {
+            
             SceneManager.LoadScene("gameScene");
+
+        }
 
         if (numberOfPlayers > 0)
             player1.text = "Green Player";
