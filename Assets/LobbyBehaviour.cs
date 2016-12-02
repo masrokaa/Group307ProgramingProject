@@ -17,12 +17,12 @@ public class LobbyBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        passedTime += Time.deltaTime;
+       /* passedTime += Time.deltaTime;
         if (passedTime > 1)
         {
             updatePlayers();
             passedTime = 0;
-        }
+        } */
 
 	}
     void updatePlayers()
