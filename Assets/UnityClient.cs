@@ -12,14 +12,14 @@ using UnityEngine.SceneManagement;
 public class UnityClient : MonoBehaviour {
     Server server;
     Client client;
-    string[] shardData;
+    string[] shardData = new string[18];
     string sharedDataString;
     public static int numberOfPlayers;
     public static int currentPlayer=4;
-    public static int[] player1PawnPos;
-    public static int[] player2PawnPos;
-    public static int[] player3PawnPos;
-    public static int[] player4PawnPos;
+    public static int[] player1PawnPos = new int[4];
+    public static int[] player2PawnPos = new int[4];
+    public static int[] player3PawnPos = new int[4];
+    public static int[] player4PawnPos = new int[4];
 
 
 

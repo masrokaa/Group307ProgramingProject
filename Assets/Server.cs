@@ -47,7 +47,7 @@ public class Server  {
             {
                 storedData += divdedData[i];
             }
-            dataToSend = storedData
+            dataToSend = storedData;
             
           
         }
