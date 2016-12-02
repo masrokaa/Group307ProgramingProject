@@ -4,8 +4,12 @@ using UnityEngine.UI;
 
 public class clickObject : MonoBehaviour {
 
-    public static GameObject selectedPawn;
 
+    
+    public GameObject selectedPawn;
+
+    public static bool Selectable = false;
+    public static bool excludeInactivePawn =false;
     
     public string componentName;
     Texture2D outline;
@@ -22,15 +26,20 @@ public class clickObject : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0) && gameObject.GetComponent<pawn>().isPawnActive)
+        if (Selectable && Input.GetMouseButtonDown(0) && gameObject.GetComponent<pawn>().player == UnityClient.currentPlayer)
         {
-           
-            selectedPawn = gameObject;
-               
-            Debug.Log("The " + this.gameObject.name + " was clicked");
-            componentName = this.gameObject.name;
-            GameObject.Find("outline").transform.position = this.gameObject.transform.position;
-            
+            if (excludeInactivePawn && gameObject.GetComponent<pawn>().isPawnActive == false)
+            {
+                Debug.Log("Pawn clicked was inactive");
+            }
+            else {
+                selectedPawn = gameObject;
+
+                Debug.Log("The " + this.gameObject.name + " was clicked");
+                componentName = this.gameObject.name;
+                
+                TurnManager.selectedPawn = selectedPawn;
+            }
         }
     }
 
