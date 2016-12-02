@@ -12,9 +12,17 @@ using UnityEngine.SceneManagement;
 public class UnityClient : MonoBehaviour {
     Server server;
     Client client;
-
+    string[] shardData;
+    string sharedDataString;
+    public static int numberOfPlayers;
     public static int currentPlayer=4;
-    
+    public static int[] player1PawnPos;
+    public static int[] player2PawnPos;
+    public static int[] player3PawnPos;
+    public static int[] player4PawnPos;
+
+
+
 
     public Text textGui;
     public static bool isHost = false;
@@ -36,7 +44,9 @@ public class UnityClient : MonoBehaviour {
         server = new Server();
 
         Debug.Log("starting server");
-        server.StartServer();
+        server.StartServer("1,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0," + "0,0,0,0");
+
+        
     }
 
    
@@ -65,6 +75,9 @@ public class UnityClient : MonoBehaviour {
 
         if (client != null && client.dataGottenFromServer != "" &&  SceneManager.GetActiveScene().name != "Lobby")
             SceneManager.LoadScene("Lobby");
+
+
+
         /*
         if (server != null) {
             Debug.Log("server started and has " + server.clients.Count + " clients connected to the server");
@@ -72,17 +85,54 @@ public class UnityClient : MonoBehaviour {
         */
     }
 
-    public int GetNumberOfPlayersInLobby()
+   void convertString()
     {
-        
-        int number = 1;
+        shardData = sharedDataString.Split(","[0]);
 
-        if (isHost)
-            number += server.clients.Count;
-        else
-            number += int.Parse(client.dataGottenFromServer);
-        return number;
+
     }
+
+    public void UpdateSharedInfo()
+    {
+        getDataFromServerOrClient();
+        convertString();
+
+        numberOfPlayers = int.Parse(shardData[0]);
+        currentPlayer = int.Parse(shardData[1]);
+        for (int i = 2; i < 2+4; i++)
+        {
+            player1PawnPos[i] = int.Parse(shardData[i]);
+        }
+        for (int i = 6; i < 6 + 4; i++)
+        {
+            player2PawnPos[i] = int.Parse(shardData[i]);
+        }
+        for (int i = 10; i < 10 + 4; i++)
+        {
+            player3PawnPos[i] = int.Parse(shardData[i]);
+        }
+        for (int i = 14; i < 14 + 4; i++)
+        {
+            player4PawnPos[i] = int.Parse(shardData[i]);
+        }
+
+
+        
+    }
+
+    public void getDataFromServerOrClient()
+    {
+        if (isHost)
+        {
+           sharedDataString = server.storedData;
+        }
+        else
+        {
+            sharedDataString = client.dataGottenFromServer;
+        }
+
+    }
+
 
 
 }

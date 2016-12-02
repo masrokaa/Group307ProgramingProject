@@ -10,28 +10,48 @@ public class LobbyBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+       
+
         multiplayerInfo = (UnityClient) GameObject.FindObjectOfType<UnityClient>();
+
+
         ishost = UnityClient.isHost;
+        if (ishost)
+            TurnManager.thisPlayer = 1;
+        else
+        {
+            multiplayerInfo.getDataFromServerOrClient();
+            multiplayerInfo.UpdateSharedInfo();
+            TurnManager.thisPlayer = UnityClient.numberOfPlayers;
+        }
+
         Debug.Log(ishost);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+
+
         passedTime += Time.deltaTime;
         if (passedTime > 1)
         {
+            Debug.Log("you are player " + TurnManager.thisPlayer);
             updatePlayers();
             passedTime = 0;
         }
 
 	}
+
+    
+
     void updatePlayers()
     {
 
         Debug.Log("updating players");
         int numberOfPlayers = 0;
-      
-        numberOfPlayers = multiplayerInfo.GetNumberOfPlayersInLobby();
+
+        numberOfPlayers = UnityClient.numberOfPlayers;
       
 
         if (numberOfPlayers > 0)

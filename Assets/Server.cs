@@ -14,8 +14,10 @@ public class Server  {
 
     public string storedData = "none";
 
-    public void StartServer()
+    public void StartServer( string data)
     {
+        storedData = data;
+        dataToSend = data;
         server = new Thread(Run);
         server.Start();
 
